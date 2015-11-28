@@ -59,7 +59,7 @@ results	= sequence [
 		prop_shuffleDistribution	= Test.QuickCheck.label "prop_shuffleDistribution" . all (
 			uncurry (&&) . (
 				(
-					< recip 20 {-empirically-}	-- The ideal value for a uniform distribution, would be zero.
+					< recip 16 {-empirically-}	-- The ideal value for a uniform distribution, would be zero.
 				) . (
 					/ getStandardDeviation (populationSize : replicate (pred $ length testList) 0)	-- Normalise wrt the worst-case; which occurs when this column contains the same letter, for each test-case in the population.
 				) . getStandardDeviation &&& (

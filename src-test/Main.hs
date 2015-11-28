@@ -24,7 +24,6 @@
 
 module Main(main) where
 
-import			Control.Arrow((***))
 import qualified	Control.Monad
 import qualified	System.Exit
 import qualified	ToolShed.Test.Data.Foldable		as Test.Data.Foldable
@@ -40,19 +39,15 @@ import qualified	ToolShed.Test.System.Random		as Test.System.Random
 -- | Entry-point.
 main :: IO ()
 main	= mapM_ (
-	snd {-exit-status-} . (
-		putStrLn . (++ ":") *** (
-			>>= (`Control.Monad.unless` System.Exit.exitFailure) . all Test.QuickCheck.Result.isSuccessful
-		)
-	)
+	(`Control.Monad.unless` System.Exit.exitFailure) . all Test.QuickCheck.Result.isSuccessful =<<
  ) [
-	("Data.Foldable",	Test.Data.Foldable.results),
-	("Data.List",		Test.Data.List.results),
-	("Data.List.Runlength",	Test.Data.List.Runlength.results),
-	("Data.List.Splits",	Test.Data.List.Splits.results),
-	("Data.Quadruple",	Test.Data.Quadruple.results),
-	("Data.Triple",		Test.Data.Triple.results),
-	("SelfValidate",	Test.SelfValidate.results),
-	("System.Random",	Test.System.Random.results)
+	Test.Data.Foldable.results,
+	Test.Data.List.results,
+	Test.Data.List.Runlength.results,
+	Test.Data.List.Splits.results,
+	Test.Data.Quadruple.results,
+	Test.Data.Triple.results,
+	Test.SelfValidate.results,
+	Test.System.Random.results
  ]
 
