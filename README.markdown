@@ -1,5 +1,7 @@
 # **ToolShed**
 
+[![Build Status](https://travis-ci.org/functionalley/ToolShed.svg?branch=master)](https://travis-ci.org/functionalley/ToolShed)
+
 This is "**ToolShed**", a library of unconnected utilities.
 
 ## Installation
