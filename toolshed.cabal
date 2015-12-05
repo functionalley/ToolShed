@@ -25,7 +25,7 @@ Synopsis:	Ill-defined library.
 Build-type:	Simple
 Description:	Ill-defined unrelated utilities used by other packages from <http://functionalley.eu>
 Category:	Utils
-Tested-with:	GHC == 7.4, GHC == 7.6, GHC == 7.8, GHC == 7.10
+Tested-with:	GHC == 7.4, GHC == 7.6, GHC == 7.8, GHC == 7.10.1
 Homepage:	http://functionalley.eu
 Maintainer:	mailto:toolshed@functionalley.eu
 Bug-reports:	mailto:toolshed@functionalley.eu
