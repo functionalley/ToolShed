@@ -1,6 +1,6 @@
 # **ToolShed**
 
-[![Build Status](https://travis-ci.org/functionalley/ToolShed.svg?branch=master)](https://travis-ci.org/functionalley/ToolShed)
+[![Hackage](https://img.shields.io/hackage/v/toolshed.svg)](https://hackage.haskell.org/package/toolshed) [![Build Status](https://travis-ci.org/functionalley/ToolShed.svg?branch=master)](https://travis-ci.org/functionalley/ToolShed)
 
 This is "**ToolShed**", a library of unconnected utilities.
 
