@@ -114,4 +114,5 @@
 * Uploaded to [GitHub](https://github.com/functionalley/ToolShed.git).
 * Simplified file **src-test/Main.hs**.
 * Relaxed test **prop_shuffleDistribution** in **ToolShed.Test.System.Random**.
-* Added **.travis.yml** to control testing by <https://docs.travis-ci.com>.
+* Added file **.travis.yml** to control testing by <https://docs.travis-ci.com>.
+* Added file **.ghci**.
