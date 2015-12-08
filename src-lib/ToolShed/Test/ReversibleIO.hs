@@ -19,7 +19,7 @@
 
  [@DESCRIPTION@]
 
-	* Facilities testing of custom implementations of 'Read' & 'Show'.
+	* Facilitates testing of custom implementations of 'Read' & 'Show'.
 
 	* CAVEAT: it doesn't actually do any IO.
 -}
@@ -27,9 +27,25 @@
 module ToolShed.Test.ReversibleIO(
 -- * Functions
 -- ** Predicates
-	isReversible
+	isReversible,
+	readTrailingGarbage
 ) where
 
 -- | Checks that composing 'read' & 'show' is equivalent to the identity.
 isReversible :: (Eq r, Read r, Show r) => r -> Bool
 isReversible r	= read (show r) == r
+
+-- | Checks whether 'read' can cope with garbage following the valid input-data.
+readTrailingGarbage :: (
+	Eq	a,
+	Read	a,
+	Show	a
+ )
+	=> (Char -> Bool)	-- ^ Whether a character of garbage might reasonably be confused with valid data, & therefore should be dropped.
+	-> a			-- ^ The datum to be written & read.
+	-> String		-- ^ The text to follow the written datum.
+	-> Bool
+readTrailingGarbage predicate x s 	= case reads . shows x $ dropWhile predicate s of
+	[(x', _)]	-> x' == x
+	_		-> False
+

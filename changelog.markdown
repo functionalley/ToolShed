@@ -54,7 +54,7 @@
 * Added functions
 	+ `ToolShed.Data.List.showListWith`,
 	+ `ToolShed.Data.List.permutations`,
-	+ `ToolShed.Data.List.gatherBy`,
+	+ `ToolShed.Data.List.gatherBy`,src-lib/ToolShed/Test/ReversibleIO.hs
 	+ `ToolShed.Data.List.findConvergenceBy`,
 	+ `ToolShed.Data.List.findConvergence`,
 	+ `ToolShed.Data.List.gather`.
@@ -80,7 +80,7 @@
 
 ## 0.15.0.0
 * Refactored **ToolShed.Test.QuickChecks**.
-* Added type `ToolShed.Data.List.Matches` & function `ToolShed.Data.List.permutationsBy`.
+* Added type `ToolShed.Data.List.Matches` & function `ToolShed.src-lib/ToolShed/Test/ReversibleIO.hsData.List.permutationsBy`.
 * Trapped the case of a null list supplied to `ToolShed.Data.List.permutationsBy`.
 * Re-implemented `ToolShed.System.Random.shuffle`, using the Fisher-Yates algorithm; which also improved the efficiency.
 * Trapped special cases in `ToolShed.System.Random.generateSelection`.
@@ -95,7 +95,7 @@
 * Tested with **haskell-platform-2013.2.0.0**.
 * Replaced preprocessor-directives with **build-depends** constraints in the *.cabal*-file.
 * In module "**ToolShed.System.File**", replaced `Control.Exception.throw` with `Control.Exception.throwIO`.
-* Replaced all instances of `(<$>)` with `fmap` to avoid ambiguity between modules "**Control.Applicative**" & "**Prelude**" which (from package "**base-4.8**") also exports this symbol.
+* Replaced all instances of `(<$>)` with `fmap` to avoid ambigusrc-lib/ToolShed/Test/ReversibleIO.hsity between modules "**Control.Applicative**" & "**Prelude**" which (from package "**base-4.8**") also exports this symbol.
 
 ## 0.16.0.0
 * Corrected the copyright dates in **Main**.
@@ -117,3 +117,4 @@
 * Added file **.travis.yml** to control testing by <https://docs.travis-ci.com>.
 * Added file **.ghci**.
 * Removed module **ToolShed.Defaultable**, since **Data.Default** is a drop-in replacement.
+* Added function **ToolShed.Test.ReversibleIO.readTrailingGarbage**.
