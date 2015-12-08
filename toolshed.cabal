@@ -14,7 +14,7 @@
 -- along with ToolShed.  If not, see <http://www.gnu.org/licenses/>.
 
 Name:		toolshed
-Version:	0.16.0.1
+Version:	0.17.0.0
 Cabal-version:	>= 1.10
 Copyright:	(C) 2010-2015 Dr. Alistair Ward
 License:	GPL
@@ -60,7 +60,6 @@ Library
         ToolShed.Data.Pair
         ToolShed.Data.Quadruple
         ToolShed.Data.Triple
-        ToolShed.Defaultable
         ToolShed.Options
         ToolShed.SelfValidate
         ToolShed.System.File
@@ -79,6 +78,7 @@ Library
         array,
         base == 4.*,
         containers >= 0.4.2.0,
+        data-default,
         deepseq >= 1.1,
         directory,
         filepath,
@@ -117,5 +117,4 @@ Test-Suite quickCheck
         QuickCheck >= 2.2,
         random,
         toolshed
-
 

@@ -108,7 +108,7 @@
 * Moved the entry-point to the test-suite from module "**Main.hs**" to "**Test.hs**" to integrate with **cabal**.
 * Partitioned the source-files into directories "**src-lib**" & "**src-test**", & referenced them individually from the *.cabal*-file to avoid repeated compilation.
 
-## 0.16.0.1
+## 0.17.0.0
 * Corrected the markdown-syntax in this file.
 * Reverted to calling "**error**" rather than "**Control.Monad.fail**", since the **String**-argument for the latter is discarded in **Monad**-implementations other than **IO**.
 * Uploaded to [GitHub](https://github.com/functionalley/ToolShed.git).
@@ -116,3 +116,4 @@
 * Relaxed test **prop_shuffleDistribution** in **ToolShed.Test.System.Random**.
 * Added file **.travis.yml** to control testing by <https://docs.travis-ci.com>.
 * Added file **.ghci**.
+* Removed module **ToolShed.Defaultable**, since **Data.Default** is a drop-in replacement.

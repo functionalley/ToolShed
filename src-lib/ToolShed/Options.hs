@@ -1,5 +1,5 @@
 {-
-	Copyright (C) 2011 Dr. Alistair Ward
+	Copyright (C) 2011-2015 Dr. Alistair Ward
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@ module ToolShed.Options(
 	Options(..)
 ) where
 
-import qualified	ToolShed.Defaultable
+import qualified	Data.Default
 
--- | Similar to the class 'Text.Regex.Base.RegexLike.RegexOptions'.
-class ToolShed.Defaultable.Defaultable a => Options a	where
+-- | The required interface.
+class Data.Default.Default a => Options a	where
 	blankValue	:: a	-- ^ The /undefined/ state of the data-type, which may be literal, but could alternatively be a logical starting value.
