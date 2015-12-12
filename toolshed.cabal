@@ -93,7 +93,7 @@ Library
     if impl(ghc >= 7.0) && flag(llvm)
         GHC-options:	-fllvm
 
-Test-Suite quickCheck
+Test-Suite test
     Default-language:	Haskell2010
     GHC-options:	-Wall -fno-warn-tabs
     Hs-source-dirs:	src-test
@@ -102,14 +102,14 @@ Test-Suite quickCheck
 
 -- Required for 'cabal sdist'.
     Other-modules:
-        ToolShed.Test.Data.Foldable
-        ToolShed.Test.Data.List
-        ToolShed.Test.Data.List.Runlength
-        ToolShed.Test.Data.List.Splits
-        ToolShed.Test.Data.Quadruple
-        ToolShed.Test.Data.Triple
-        ToolShed.Test.SelfValidate
-        ToolShed.Test.System.Random
+        ToolShed.Test.QuickCheck.Data.Foldable
+        ToolShed.Test.QuickCheck.Data.List
+        ToolShed.Test.QuickCheck.Data.List.Runlength
+        ToolShed.Test.QuickCheck.Data.List.Splits
+        ToolShed.Test.QuickCheck.Data.Quadruple
+        ToolShed.Test.QuickCheck.Data.Triple
+        ToolShed.Test.QuickCheck.SelfValidate
+        ToolShed.Test.QuickCheck.System.Random
 
     Build-depends:
         base == 4.*,

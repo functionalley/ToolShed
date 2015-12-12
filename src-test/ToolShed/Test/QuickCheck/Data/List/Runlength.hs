@@ -17,24 +17,20 @@
 {- |
  [@AUTHOR@]	Dr. Alistair Ward
 
- [@DESCRIPTION@]	Defines /QuickCheck/-properties "ToolShed.Data.List.Splits".
+ [@DESCRIPTION@]	Defines /QuickCheck/-properties "ToolShed.Data.List.Runlength".
 -}
 
-module ToolShed.Test.Data.List.Splits(
+module ToolShed.Test.QuickCheck.Data.List.Runlength(
 -- * Constants
 	results
 ) where
 
-import			Control.Arrow((***))
-import qualified	Data.Tuple
-import qualified	ToolShed.Data.List.Splits
+import qualified	ToolShed.Data.List.Runlength
 import qualified	Test.QuickCheck
-import			Test.QuickCheck((==>))
 
 -- | The constant test-results for this data-type.
 results :: IO [Test.QuickCheck.Result]
-results	= mapM Test.QuickCheck.quickCheckResult [prop_splitsFrom] where
-	prop_splitsFrom :: Int -> [Int] -> Test.QuickCheck.Property
-	prop_splitsFrom i l	= not (null l) ==> Test.QuickCheck.label "prop_splitsFrom" $ take n (ToolShed.Data.List.Splits.splitsLeftFrom index l) == take n (map (Data.Tuple.swap . (reverse *** reverse)) . ToolShed.Data.List.Splits.splitsRightFrom (length l - index) $ reverse l)	where
-		index	= i `mod` length l
-		n	= succ index
+results	= mapM Test.QuickCheck.quickCheckResult [prop_runLength] where
+	prop_runLength :: [Int] -> Test.QuickCheck.Property
+	prop_runLength l	= Test.QuickCheck.label "prop_runLength" $ ToolShed.Data.List.Runlength.decode (ToolShed.Data.List.Runlength.encode l) == l
+

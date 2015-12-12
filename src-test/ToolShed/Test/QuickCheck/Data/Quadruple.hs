@@ -20,7 +20,7 @@
  [@DESCRIPTION@]	Defines /QuickCheck/-properties "ToolShed.Data.Quadruple".
 -}
 
-module ToolShed.Test.Data.Quadruple(
+module ToolShed.Test.QuickCheck.Data.Quadruple(
 -- * Constants
 	results
 ) where

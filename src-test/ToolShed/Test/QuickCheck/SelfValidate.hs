@@ -20,7 +20,7 @@
  [@DESCRIPTION@]	Defines /QuickCheck/-properties "ToolShed.SelfValidate".
 -}
 
-module ToolShed.Test.SelfValidate(
+module ToolShed.Test.QuickCheck.SelfValidate(
 -- * Constants
 	results,
 -- * Types

@@ -20,7 +20,7 @@
  [@DESCRIPTION@]	Defines /QuickCheck/-properties "ToolShed.Data.Foldable".
 -}
 
-module ToolShed.Test.Data.Foldable(
+module ToolShed.Test.QuickCheck.Data.Foldable(
 -- * Constants
 	results
 ) where

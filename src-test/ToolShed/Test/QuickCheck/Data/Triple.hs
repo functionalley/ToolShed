@@ -1,5 +1,5 @@
 {-
-	Copyright (C) 2012-2015 Dr. Alistair Ward
+	Copyright (C) 2013-2015 Dr. Alistair Ward
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -17,20 +17,21 @@
 {- |
  [@AUTHOR@]	Dr. Alistair Ward
 
- [@DESCRIPTION@]	Defines /QuickCheck/-properties "ToolShed.Data.List.Runlength".
+ [@DESCRIPTION@]	Defines /QuickCheck/-properties "ToolShed.Data.Triple".
 -}
 
-module ToolShed.Test.Data.List.Runlength(
+module ToolShed.Test.QuickCheck.Data.Triple(
 -- * Constants
 	results
 ) where
 
-import qualified	ToolShed.Data.List.Runlength
 import qualified	Test.QuickCheck
+import qualified	ToolShed.Data.Triple
 
 -- | The constant test-results for this data-type.
 results :: IO [Test.QuickCheck.Result]
-results	= mapM Test.QuickCheck.quickCheckResult [prop_runLength] where
-	prop_runLength :: [Int] -> Test.QuickCheck.Property
-	prop_runLength l	= Test.QuickCheck.label "prop_runLength" $ ToolShed.Data.List.Runlength.decode (ToolShed.Data.List.Runlength.encode l) == l
+results	= mapM Test.QuickCheck.quickCheckResult [prop_accessors]	where
+	prop_accessors :: (Int, Char, Bool) -> Test.QuickCheck.Property
+	prop_accessors triple	= Test.QuickCheck.label "prop_accessors" $ (f ToolShed.Data.Triple.getFirst triple, f ToolShed.Data.Triple.getSecond triple, f ToolShed.Data.Triple.getThird triple) == triple	where
+		f	= ToolShed.Data.Triple.uncurry3 . ToolShed.Data.Triple.curry3
 

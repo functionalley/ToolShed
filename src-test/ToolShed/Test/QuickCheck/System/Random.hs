@@ -20,7 +20,7 @@
  [@DESCRIPTION@]	Defines /QuickCheck/-properties "ToolShed.System.Random".
 -}
 
-module ToolShed.Test.System.Random(
+module ToolShed.Test.QuickCheck.System.Random(
 -- * Constants
 	results,
 -- * Functions

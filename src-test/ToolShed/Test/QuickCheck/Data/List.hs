@@ -20,7 +20,7 @@
  [@DESCRIPTION@]	Defines /QuickCheck/-properties "ToolShed.Data.List".
 -}
 
-module ToolShed.Test.Data.List(
+module ToolShed.Test.QuickCheck.Data.List(
 -- * Constants
 	results
 ) where

@@ -26,28 +26,28 @@ module Main(main) where
 
 import qualified	Control.Monad
 import qualified	System.Exit
-import qualified	ToolShed.Test.Data.Foldable		as Test.Data.Foldable
-import qualified	ToolShed.Test.Data.List			as Test.Data.List
-import qualified	ToolShed.Test.Data.List.Runlength	as Test.Data.List.Runlength
-import qualified	ToolShed.Test.Data.List.Splits		as Test.Data.List.Splits
-import qualified	ToolShed.Test.Data.Quadruple		as Test.Data.Quadruple
-import qualified	ToolShed.Test.Data.Triple		as Test.Data.Triple
-import qualified	ToolShed.Test.QuickCheck.Result		as Test.QuickCheck.Result
-import qualified	ToolShed.Test.SelfValidate		as Test.SelfValidate
-import qualified	ToolShed.Test.System.Random		as Test.System.Random
+import qualified	ToolShed.Test.QuickCheck.Data.Foldable		as Test.QuickCheck.Data.Foldable
+import qualified	ToolShed.Test.QuickCheck.Data.List		as Test.QuickCheck.Data.List
+import qualified	ToolShed.Test.QuickCheck.Data.List.Runlength	as Test.QuickCheck.Data.List.Runlength
+import qualified	ToolShed.Test.QuickCheck.Data.List.Splits	as Test.QuickCheck.Data.List.Splits
+import qualified	ToolShed.Test.QuickCheck.Data.Quadruple		as Test.QuickCheck.Data.Quadruple
+import qualified	ToolShed.Test.QuickCheck.Data.Triple		as Test.QuickCheck.Data.Triple
+import qualified	ToolShed.Test.QuickCheck.Result			as Test.QuickCheck.Result
+import qualified	ToolShed.Test.QuickCheck.SelfValidate		as Test.QuickCheck.SelfValidate
+import qualified	ToolShed.Test.QuickCheck.System.Random		as Test.QuickCheck.System.Random
 
 -- | Entry-point.
 main :: IO ()
 main	= mapM_ (
 	(`Control.Monad.unless` System.Exit.exitFailure) . all Test.QuickCheck.Result.isSuccessful =<<
  ) [
-	Test.Data.Foldable.results,
-	Test.Data.List.results,
-	Test.Data.List.Runlength.results,
-	Test.Data.List.Splits.results,
-	Test.Data.Quadruple.results,
-	Test.Data.Triple.results,
-	Test.SelfValidate.results,
-	Test.System.Random.results
+	Test.QuickCheck.Data.Foldable.results,
+	Test.QuickCheck.Data.List.results,
+	Test.QuickCheck.Data.List.Runlength.results,
+	Test.QuickCheck.Data.List.Splits.results,
+	Test.QuickCheck.Data.Quadruple.results,
+	Test.QuickCheck.Data.Triple.results,
+	Test.QuickCheck.SelfValidate.results,
+	Test.QuickCheck.System.Random.results
  ]
 

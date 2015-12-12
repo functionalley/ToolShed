@@ -1,5 +1,5 @@
 {-
-	Copyright (C) 2013-2015 Dr. Alistair Ward
+	Copyright (C) 2012-2015 Dr. Alistair Ward
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -17,21 +17,24 @@
 {- |
  [@AUTHOR@]	Dr. Alistair Ward
 
- [@DESCRIPTION@]	Defines /QuickCheck/-properties "ToolShed.Data.Triple".
+ [@DESCRIPTION@]	Defines /QuickCheck/-properties "ToolShed.Data.List.Splits".
 -}
 
-module ToolShed.Test.Data.Triple(
+module ToolShed.Test.QuickCheck.Data.List.Splits(
 -- * Constants
 	results
 ) where
 
+import			Control.Arrow((***))
+import qualified	Data.Tuple
+import qualified	ToolShed.Data.List.Splits
 import qualified	Test.QuickCheck
-import qualified	ToolShed.Data.Triple
+import			Test.QuickCheck((==>))
 
 -- | The constant test-results for this data-type.
 results :: IO [Test.QuickCheck.Result]
-results	= mapM Test.QuickCheck.quickCheckResult [prop_accessors]	where
-	prop_accessors :: (Int, Char, Bool) -> Test.QuickCheck.Property
-	prop_accessors triple	= Test.QuickCheck.label "prop_accessors" $ (f ToolShed.Data.Triple.getFirst triple, f ToolShed.Data.Triple.getSecond triple, f ToolShed.Data.Triple.getThird triple) == triple	where
-		f	= ToolShed.Data.Triple.uncurry3 . ToolShed.Data.Triple.curry3
-
+results	= mapM Test.QuickCheck.quickCheckResult [prop_splitsFrom] where
+	prop_splitsFrom :: Int -> [Int] -> Test.QuickCheck.Property
+	prop_splitsFrom i l	= not (null l) ==> Test.QuickCheck.label "prop_splitsFrom" $ take n (ToolShed.Data.List.Splits.splitsLeftFrom index l) == take n (map (Data.Tuple.swap . (reverse *** reverse)) . ToolShed.Data.List.Splits.splitsRightFrom (length l - index) $ reverse l)	where
+		index	= i `mod` length l
+		n	= succ index
