@@ -41,7 +41,9 @@ results	= sequence [
 	Test.QuickCheck.quickCheckResult prop_permutations,
 	Test.QuickCheck.quickCheckResult prop_permutations',
 	Test.QuickCheck.quickCheckResult prop_permutationsBy,
-	Test.QuickCheck.quickCheckResult prop_permutationsBy'
+	Test.QuickCheck.quickCheckResult prop_permutationsBy',
+	Test.QuickCheck.quickCheckResult prop_interleave,
+	Test.QuickCheck.quickCheckResult prop_interleave'
  ] where
 		prop_chunk :: Int -> [Int] -> Test.QuickCheck.Property
 		prop_chunk i l		= Test.QuickCheck.label "prop_chunk" $ concat (ToolShed.Data.List.chunk (succ $ abs i) l) == l
@@ -73,4 +75,10 @@ results	= sequence [
 		prop_permutationsBy' i	= Test.QuickCheck.label "prop_permutationsBy'" . all ((== range) . Data.List.sort) . ToolShed.Data.List.permutationsBy (/=) $ replicate (succ i') range	where
 			i'	= succ $ mod i 7
 			range	= [0 .. i']
+
+		prop_interleave :: [Int] -> [Int] -> Test.QuickCheck.Property
+		prop_interleave xs ys	= Test.QuickCheck.label "prop_interleave" $ length (ToolShed.Data.List.interleave xs ys) == length xs + length ys
+
+		prop_interleave' :: [Int] -> [Int] -> Test.QuickCheck.Property
+		prop_interleave' xs ys	= not (null xs) ==> Test.QuickCheck.label "prop_interleave'" $ head (ToolShed.Data.List.interleave xs ys) == head xs
 

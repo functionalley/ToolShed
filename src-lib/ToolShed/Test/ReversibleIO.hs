@@ -45,7 +45,7 @@ readTrailingGarbage :: (
 	-> a			-- ^ The datum to be written & read.
 	-> String		-- ^ The text to follow the written datum.
 	-> Bool
-readTrailingGarbage predicate x s 	= case reads . shows x $ dropWhile predicate s of
+readTrailingGarbage predicate x s	= case reads . shows x $ dropWhile predicate s of
 	[(x', _)]	-> x' == x
 	_		-> False
 

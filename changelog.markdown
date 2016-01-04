@@ -118,3 +118,4 @@
 * Added file **.ghci**.
 * Removed module **ToolShed.Defaultable**, since **Data.Default** is a drop-in replacement.
 * Added function **ToolShed.Test.ReversibleIO.readTrailingGarbage**.
+* Added function **ToolShed.Data.List.interleave** with corresponding quickcheck-tests.

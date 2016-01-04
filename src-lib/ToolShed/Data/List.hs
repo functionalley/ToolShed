@@ -31,6 +31,7 @@ module ToolShed.Data.List(
 	equalityBy,
 	findConvergence,
 	findConvergenceBy,
+	interleave,
 	linearise,
 	merge,
 	mergeBy,
@@ -149,6 +150,11 @@ nubWithInt	= Data.IntSet.toList . Data.IntSet.fromList
 linearise :: [(a, a)] -> [a]
 linearise []			= []
 linearise ((l, r) : remainder)	= l : r : linearise remainder	-- Recurse.
+
+-- | Interleaves the specified lists, taking the first item from the first list.
+interleave :: [a] -> [a] -> [a]
+interleave (x : xs) ys	= x : interleave ys xs
+interleave _ ys		= ys
 
 {- |
 	* Merge two sorted lists, according to the specified order, to product a single sorted list.
