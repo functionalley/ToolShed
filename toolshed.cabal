@@ -66,6 +66,7 @@ Library
         ToolShed.System.Random
         ToolShed.System.TimeAction
         ToolShed.System.TimePure
+        ToolShed.Test.Ix
         ToolShed.Test.QuickCheck.Arbitrary.Array
         ToolShed.Test.QuickCheck.Arbitrary.Map
         ToolShed.Test.QuickCheck.Arbitrary.Set
