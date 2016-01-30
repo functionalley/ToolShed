@@ -28,7 +28,7 @@ module ToolShed.Test.Ix(
 
 import qualified	Data.Array.IArray
 
--- | Checks that implementations of Data.Array.Ix satisfy rules.
+-- | Checks that implementations of Data.Array.IArray.Ix satisfy rules.
 index :: (Bounded a, Data.Array.IArray.Ix a) => a -> Bool
 index x	= Data.Array.IArray.range (minBound, maxBound) !! Data.Array.IArray.index (minBound, maxBound) x == x
 
