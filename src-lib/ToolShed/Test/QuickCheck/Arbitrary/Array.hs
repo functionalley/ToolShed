@@ -31,7 +31,12 @@ module ToolShed.Test.QuickCheck.Arbitrary.Array() where
 import qualified	Data.Array.IArray
 import qualified	Test.QuickCheck
 
-instance (Bounded i, Data.Array.IArray.Ix i, Enum i, Test.QuickCheck.Arbitrary e) => Test.QuickCheck.Arbitrary (Data.Array.IArray.Array i e)	where
-	arbitrary	= (Data.Array.IArray.array bounds . zip [minBound .. maxBound]) `fmap` Test.QuickCheck.vector (succ $ fromEnum (snd bounds) - fromEnum (fst bounds))	where
+instance (
+	Bounded				i,
+	Data.Array.IArray.Ix		i,
+	Enum				i,
+	Test.QuickCheck.Arbitrary	e
+ ) => Test.QuickCheck.Arbitrary (Data.Array.IArray.Array i e)	where
+	arbitrary	= Data.Array.IArray.listArray bounds `fmap` Test.QuickCheck.vector (succ $ fromEnum (snd bounds) - fromEnum (fst bounds))	where
 		bounds	= (minBound, maxBound)
 
