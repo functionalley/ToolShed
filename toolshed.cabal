@@ -54,6 +54,7 @@ Library
 
     Exposed-modules:
         ToolShed.Data.Foldable
+        ToolShed.Data.Array.IArray
         ToolShed.Data.List
         ToolShed.Data.List.Runlength
         ToolShed.Data.List.Splits

@@ -119,4 +119,5 @@
 * Removed module **ToolShed.Defaultable**, since **Data.Default** is a drop-in replacement.
 * Added function **ToolShed.Test.ReversibleIO.readTrailingGarbage**.
 * Added function **ToolShed.Data.List.interleave** with corresponding quickcheck-tests.
-* Added module **ToolShed.Test.Ix** to facilitate testing instances of **Data.Array.Ix**.
+* Added module **ToolShed.Test.Ix** to facilitate testing instances of **Data.Array.IArray.Ix**.
+* Added module **ToolShed.Data.Array.IArray**.
