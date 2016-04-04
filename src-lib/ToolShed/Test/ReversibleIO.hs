@@ -28,12 +28,17 @@ module ToolShed.Test.ReversibleIO(
 -- * Functions
 -- ** Predicates
 	isReversible,
+	readPrependedWhiteSpace,
 	readTrailingGarbage
 ) where
 
 -- | Checks that composing 'read' & 'show' is equivalent to the identity.
 isReversible :: (Eq r, Read r, Show r) => r -> Bool
 isReversible r	= read (show r) == r
+
+-- | Checks whether 'read' can skip prepended white space; 'isReversible' is a prerequisite.
+readPrependedWhiteSpace :: (Eq r, Read r, Show r) => r -> Bool
+readPrependedWhiteSpace r	= read (" \t\r\n" ++ show r) == r
 
 -- | Checks whether 'read' can cope with garbage following the valid input-data.
 readTrailingGarbage :: (

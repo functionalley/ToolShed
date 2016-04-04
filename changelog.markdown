@@ -117,7 +117,7 @@
 * Added file **.travis.yml** to control testing by <https://docs.travis-ci.com>.
 * Added file **.ghci**.
 * Removed module **ToolShed.Defaultable**, since **Data.Default** is a drop-in replacement.
-* Added function **ToolShed.Test.ReversibleIO.readTrailingGarbage**.
+* Added functions **ToolShed.Test.ReversibleIO.readTrailingGarbage** & **ToolShed.Test.ReversibleIO.readPrependedWhiteSpace**.
 * Added function **ToolShed.Data.List.interleave** with corresponding quickcheck-tests.
 * Added module **ToolShed.Test.Ix** to facilitate testing instances of **Data.Array.IArray.Ix**.
 * Added module **ToolShed.Data.Array.IArray**.
