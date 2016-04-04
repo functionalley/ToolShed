@@ -40,7 +40,7 @@ isReversible r	= read (show r) == r
 readPrependedWhiteSpace :: (Eq r, Read r, Show r) => r -> Bool
 readPrependedWhiteSpace r	= read (" \t\r\n" ++ show r) == r
 
--- | Checks whether 'read' can cope with garbage following the valid input-data.
+-- | Checks whether 'read' both copes with garbage following the valid input-data, & leaves it unchanged.
 readTrailingGarbage :: (
 	Eq	a,
 	Read	a,
@@ -50,7 +50,9 @@ readTrailingGarbage :: (
 	-> a			-- ^ The datum to be written & read.
 	-> String		-- ^ The text to follow the written datum.
 	-> Bool
-readTrailingGarbage predicate x s	= case reads . shows x $ dropWhile predicate s of
-	[(x', _)]	-> x' == x
-	_		-> False
+readTrailingGarbage predicate x s	= let
+	s'	= dropWhile predicate s
+ in case reads $ shows x s' of
+	[pair]	-> pair == (x, s')
+	_	-> False
 
