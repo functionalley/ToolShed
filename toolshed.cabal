@@ -60,6 +60,7 @@ Library
         ToolShed.Data.List.Splits
         ToolShed.Data.Pair
         ToolShed.Data.Quadruple
+        ToolShed.Data.String
         ToolShed.Data.Triple
         ToolShed.Options
         ToolShed.SelfValidate

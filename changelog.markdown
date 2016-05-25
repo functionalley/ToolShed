@@ -121,3 +121,4 @@
 * Added function **ToolShed.Data.List.interleave** with corresponding quickcheck-tests.
 * Added module **ToolShed.Test.Ix** to facilitate testing instances of **Data.Array.IArray.Ix**.
 * Added module **ToolShed.Data.Array.IArray**.
+* Added function **ToolShed.Data.String.deTab**.
