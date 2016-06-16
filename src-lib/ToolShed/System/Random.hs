@@ -40,7 +40,7 @@ randomGens :: System.Random.RandomGen randomGen => randomGen -> [randomGen]
 randomGens	= uncurry (:) . Control.Arrow.second randomGens {-recurse-} . System.Random.split
 
 {- |
-	* Shuffles the specified finite list, using the /Fisher-Yates/ algorithm; <http://en.wikipedia.org/wiki/Fisher-Yates_shuffle>.
+	* Shuffles the specified finite list, using the /Fisher-Yates/ algorithm; <https://en.wikipedia.org/wiki/Fisher-Yates_shuffle>.
 
 	* The resulting list has the same length and constituents as the original; only the order has changed.
 
