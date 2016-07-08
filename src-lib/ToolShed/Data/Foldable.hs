@@ -37,14 +37,18 @@ import qualified	Data.Map
 
 	* The groups are returned in ascending order, whilst their elements remain in their original order.
 -}
-gatherBy :: (Data.Foldable.Foldable f, Ord b) => (a -> b) -> f a -> [[a]]
+gatherBy
+	:: (Data.Foldable.Foldable foldable, Ord b)
+	=> (a -> b)	-- ^ Function to apply before testing for equality.
+	-> foldable a	-- ^ The input data.
+	-> [[a]]
 gatherBy f	= Data.Map.elems . Data.Foldable.foldr (uncurry (Data.Map.insertWith (++)) . (f &&& return {-to List-monad-})) Data.Map.empty
 
 -- | A specific instance of 'gatherBy'.
-gather :: (Data.Foldable.Foldable f, Ord a) => f a -> [[a]]
+gather :: (Data.Foldable.Foldable foldable, Ord a) => foldable a -> [[a]]
 gather	= gatherBy id
 
 -- | Whether the specified collection contains any equal items.
-hasDuplicates :: (Data.Foldable.Foldable f, Ord a) => f a -> Bool
+hasDuplicates :: (Data.Foldable.Foldable foldable, Ord a) => foldable a -> Bool
 hasDuplicates	= any ((> 1) . length) . gather
 
