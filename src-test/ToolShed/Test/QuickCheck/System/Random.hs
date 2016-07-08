@@ -38,11 +38,11 @@ import qualified	Test.QuickCheck
 import qualified	ToolShed.System.Random
 
 -- | Determines the /mean/ of the specified numbers
-getMean :: (Data.Foldable.Foldable f, Real r, Fractional result) => f r -> result
+getMean :: (Data.Foldable.Foldable foldable, Real r, Fractional result) => foldable r -> result
 getMean	= uncurry (/) . (realToFrac *** fromIntegral) . Data.Foldable.foldr (\i -> (+ i) *** succ) (0, 0 :: Int)
 
 -- | Find the standard-deviation of the specified list.
-getStandardDeviation :: (Data.Foldable.Foldable f, Functor f, Real r) => f r -> Double
+getStandardDeviation :: (Data.Foldable.Foldable foldable, Functor foldable, Real r) => foldable r -> Double
 getStandardDeviation x	= sqrt . getMean $ fmap ((^ (2 :: Int)) . (+ negate (getMean x :: Rational)) . toRational) x
 
 -- | The constant test-results for this data-type.
