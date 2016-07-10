@@ -23,7 +23,7 @@
 module ToolShed.SelfValidate(
 -- * Type-classes
 	SelfValidator(..),
--- ** Functions
+-- * Functions
 	getFirstError,
 	extractErrors
 ) where
