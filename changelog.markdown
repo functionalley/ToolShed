@@ -113,12 +113,13 @@
 * Reverted to calling "**error**" rather than "**Control.Monad.fail**", since the **String**-argument for the latter is discarded in **Monad**-implementations other than **IO**.
 * Uploaded to [GitHub](https://github.com/functionalley/ToolShed.git).
 * Simplified file **src-test/Main.hs**.
-* Relaxed test **prop_shuffleDistribution** in **ToolShed.Test.System.Random**.
+* Relaxed test **prop_shuffleDistribution** in module **ToolShed.Test.System.Random**.
 * Added file **.travis.yml** to control testing by <https://docs.travis-ci.com>.
 * Added file **.ghci**.
 * Removed module **ToolShed.Defaultable**, since **Data.Default** is a drop-in replacement.
 * Added functions **ToolShed.Test.ReversibleIO.readTrailingGarbage** & **ToolShed.Test.ReversibleIO.readPrependedWhiteSpace**.
 * Added function **ToolShed.Data.List.interleave** with corresponding quickcheck-tests.
-* Added module **ToolShed.Test.Ix** to facilitate testing instances of **Data.Array.IArray.Ix**.
+* Added module **ToolShed.Test.Ix** to facilitate testing instances of class **Data.Array.IArray.Ix**.
 * Added module **ToolShed.Data.Array.IArray**.
 * Added function **ToolShed.Data.String.deTab**.
+* Generalised function **ToolShed.System.Random.select** to accept any **Data.Foldable.Foldable** rather than merely a list.

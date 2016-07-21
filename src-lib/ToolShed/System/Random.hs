@@ -31,6 +31,7 @@ module ToolShed.System.Random(
 ) where
 
 import qualified	Control.Arrow
+import qualified	Data.Foldable
 import qualified	Data.Sequence
 import			Data.Sequence((><), ViewL((:<)))
 import qualified	System.Random
@@ -69,9 +70,15 @@ generateSelection _ []		= error "ToolShed.System.Random.generateSelection:\tnull
 generateSelection _ [x]		= repeat x	-- Not strictly necessary, but more efficient.
 generateSelection randomGen l	= map (l !!) $ System.Random.randomRs (0, pred $ length l) randomGen
 
--- | Return a randomly selected element from the specified list.
-select :: System.Random.RandomGen randomGen => randomGen -> [a] -> a
-select randomGen	= head . generateSelection randomGen
+-- | Return a randomly selected element from those provided.
+select :: (
+	Data.Foldable.Foldable	foldable,
+	System.Random.RandomGen	randomGen
+ )
+	=> randomGen
+	-> foldable a
+	-> a
+select randomGen	= head . generateSelection randomGen . Data.Foldable.toList
 
 {- |
 	* Generate an infinite list of data, each independently selected random instances of the specified /bounded/ type.
