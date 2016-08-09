@@ -65,10 +65,10 @@ shuffle randomGen l	= slave randomGen s (pred $ Data.Sequence.length s)	where
 
 	* CAVEAT: because the selections are made non-destructively, duplicates may be returned; cf. 'shuffle'.
 -}
-generateSelection :: System.Random.RandomGen randomGen => randomGen -> [a] -> [a]
-generateSelection _ []		= error "ToolShed.System.Random.generateSelection:\tnull list"
-generateSelection _ [x]		= repeat x	-- Not strictly necessary, but more efficient.
-generateSelection randomGen l	= map (l !!) $ System.Random.randomRs (0, pred $ length l) randomGen
+generateSelection :: System.Random.RandomGen randomGen => randomGen -> [a] -> Maybe [a]
+generateSelection _ []		= Nothing
+generateSelection _ [x]		= Just $ repeat x	-- Not strictly necessary, but more efficient.
+generateSelection randomGen l	= Just . map (l !!) $ System.Random.randomRs (0, pred $ length l) randomGen
 
 -- | Return a randomly selected element from those provided.
 select :: (
@@ -77,8 +77,8 @@ select :: (
  )
 	=> randomGen
 	-> foldable a
-	-> a
-select randomGen	= head . generateSelection randomGen . Data.Foldable.toList
+	-> Maybe a
+select randomGen	= fmap head . generateSelection randomGen . Data.Foldable.toList
 
 {- |
 	* Generate an infinite list of data, each independently selected random instances of the specified /bounded/ type.
