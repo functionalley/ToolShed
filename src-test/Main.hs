@@ -25,7 +25,9 @@
 module Main(main) where
 
 import qualified	Control.Monad
+import qualified	Test.HUnit
 import qualified	System.Exit
+import qualified	ToolShed.Test.HUnit.Data.List			as Test.HUnit.Data.List
 import qualified	ToolShed.Test.QuickCheck.Data.Foldable		as Test.QuickCheck.Data.Foldable
 import qualified	ToolShed.Test.QuickCheck.Data.List		as Test.QuickCheck.Data.List
 import qualified	ToolShed.Test.QuickCheck.Data.List.Runlength	as Test.QuickCheck.Data.List.Runlength
@@ -38,7 +40,9 @@ import qualified	ToolShed.Test.QuickCheck.System.Random		as Test.QuickCheck.Syst
 
 -- | Entry-point.
 main :: IO ()
-main	= mapM_ (
+main	= mapM_ Test.HUnit.runTestTT [
+	Test.HUnit.Data.List.testCases
+ ] >> mapM_ (
 	(`Control.Monad.unless` System.Exit.exitFailure) . all Test.QuickCheck.Result.isSuccessful =<<
  ) [
 	Test.QuickCheck.Data.Foldable.results,

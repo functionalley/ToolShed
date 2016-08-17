@@ -123,3 +123,4 @@
 * Added module **ToolShed.Data.Array.IArray**.
 * Added function **ToolShed.Data.String.deTab**.
 * Generalised function **ToolShed.System.Random.select** to accept any **Data.Foldable.Foldable** rather than merely a list, & to return **Maybe** rather than an error on receipt of null.
+* Added fuzzy matching function **ToolShed.Data.List.measureJaroDistance** & associated **HUnit** & **Quickcheck** tests.

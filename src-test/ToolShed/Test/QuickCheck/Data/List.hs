@@ -1,5 +1,5 @@
 {-
-	Copyright (C) 2012-2015 Dr. Alistair Ward
+	Copyright (C) 2012-2016 Dr. Alistair Ward
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@ module ToolShed.Test.QuickCheck.Data.List(
 ) where
 
 import qualified	Data.List
+import qualified	Data.Tuple
 import qualified	ToolShed.Data.List
 import qualified	Test.QuickCheck
 import			Test.QuickCheck((==>))
@@ -43,7 +44,9 @@ results	= sequence [
 	Test.QuickCheck.quickCheckResult prop_permutationsBy,
 	Test.QuickCheck.quickCheckResult prop_permutationsBy',
 	Test.QuickCheck.quickCheckResult prop_interleave,
-	Test.QuickCheck.quickCheckResult prop_interleave'
+	Test.QuickCheck.quickCheckResult prop_interleave',
+	Test.QuickCheck.quickCheckResult prop_jaroDistanceCommutative,
+	Test.QuickCheck.quickCheckResult prop_jaroDistanceRange
  ] where
 		prop_chunk :: Int -> [Int] -> Test.QuickCheck.Property
 		prop_chunk i l		= Test.QuickCheck.label "prop_chunk" $ concat (ToolShed.Data.List.chunk (succ $ abs i) l) == l
@@ -81,4 +84,8 @@ results	= sequence [
 
 		prop_interleave' :: [Int] -> [Int] -> Test.QuickCheck.Property
 		prop_interleave' xs ys	= not (null xs) ==> Test.QuickCheck.label "prop_interleave'" $ head (ToolShed.Data.List.interleave xs ys) == head xs
+
+		prop_jaroDistanceCommutative, prop_jaroDistanceRange :: (String, String) -> Test.QuickCheck.Property
+		prop_jaroDistanceCommutative pair 	= Test.QuickCheck.label "prop_jaroDistanceCommutative" $ (ToolShed.Data.List.measureJaroDistance pair :: Rational) == ToolShed.Data.List.measureJaroDistance (Data.Tuple.swap pair)
+		prop_jaroDistanceRange pair 		= Test.QuickCheck.label "prop_jaroDistanceRange" $ all ($ (ToolShed.Data.List.measureJaroDistance pair :: Rational)) [(>= 0), (<= 1)] 
 

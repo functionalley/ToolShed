@@ -33,6 +33,7 @@ module ToolShed.Data.List(
 	findConvergenceBy,
 	interleave,
 	linearise,
+	measureJaroDistance,
 	merge,
 	mergeBy,
 	nub',
@@ -46,10 +47,11 @@ module ToolShed.Data.List(
 ) where
 
 import qualified	Control.Arrow
-import			Control.Arrow((&&&))
+import			Control.Arrow((&&&),(***))
 import qualified	Data.IntSet
 import qualified	Data.List
 import qualified	Data.Set
+import qualified	Data.Tuple
 
 -- | The length of the chunks into which a list is split.
 type ChunkLength	= Int
@@ -206,4 +208,49 @@ showListWithChar (startDelimiter, separator, endDelimiter)	= foldr (.) (showChar
 -- | A specialisation of 'showListWith'.
 showListWithString :: Show element => (String, String, String) -> [element] -> ShowS
 showListWithString (startDelimiter, separator, endDelimiter)	= foldr (.) (showString endDelimiter) . (showString startDelimiter :) . Data.List.intersperse (showString separator) . map shows
+
+{- |
+	* Measures the /distance/ between two lists (typically Strings).
+
+	* The operation is /commutative/; it doesn't matter about the order of the arguments.
+
+	* The result ranges from /0/ when they're completely dissimilar, to /1/ when identical.
+
+	* <https://lingpipe-blog.com/2006/12/13/code-spelunking-jaro-winkler-string-comparison>.
+-}
+measureJaroDistance :: (Eq a, Fractional distance) => ([a], [a]) -> distance
+measureJaroDistance pair
+	| uncurry (==) pair	= 1
+	| nMatches == 0		= 0	-- Guard against divide-by-zero.
+	| otherwise		= sum [
+		fMatches / fromIntegral l,
+		fMatches / fromIntegral l',
+		1 - fromIntegral (
+			foldr (
+				\cc	-> if uncurry (==) cc then id else succ
+			) (0 :: Int) $ uncurry zip matchesPair	-- Count transpositions; matches which occur in a different order.
+		) / (
+			2 {-compensate for double counting-} * fMatches
+		)
+	] / 3 {-normalise: each component of the above sum is in the closed unit interval-}
+	where
+		l, l'	:: Int
+		(l, l')	= length *** length $ pair
+
+		findMatches :: Eq a => ([a], [a]) -> [a]
+		findMatches	= uncurry slave . (zip [0 ..] *** zip [0 ..])	where
+			slave :: Eq a => [(Int, a)] -> [(Int, a)] -> [a]
+			slave [] _		= []	-- There's nothing to match.
+			slave _ []		= []	-- Ignore any remaining 'xs', since there's nothing against which to match.
+			slave ((i, x) : xs) ys	= case span (
+				uncurry (||) . (
+					(> pred (max l l' `div` 2)) . abs . (i -) *** (x /=)
+				) -- Reject either mismatches, or matches which occur outside a maximum separation.
+			 ) ys of
+				(matchFailures, _ : untested)	-> x : slave xs (matchFailures ++ untested)	-- Remove the matched datum, so that it can't be matched against again.
+				_				-> slave xs ys					-- Failed to match 'x' in 'ys'.
+
+		matchesPair@(matches, _)	= findMatches &&& findMatches . Data.Tuple.swap $ pair
+		nMatches			= length matches
+		fMatches			= fromIntegral nMatches	-- Translate to the return-type.
 

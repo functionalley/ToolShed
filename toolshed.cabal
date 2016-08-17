@@ -105,6 +105,7 @@ Test-Suite test
 
 -- Required for 'cabal sdist'.
     Other-modules:
+        ToolShed.Test.HUnit.Data.List
         ToolShed.Test.QuickCheck.Data.Foldable
         ToolShed.Test.QuickCheck.Data.List
         ToolShed.Test.QuickCheck.Data.List.Runlength
@@ -117,6 +118,7 @@ Test-Suite test
     Build-depends:
         base == 4.*,
         containers >= 0.4.2.0,
+        HUnit,
         QuickCheck >= 2.2,
         random,
         toolshed
