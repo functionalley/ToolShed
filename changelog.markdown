@@ -127,3 +127,5 @@
 * Tested with **ghc-8.0.1**.
 ## 0.17.0.1
 * Modified Travis-CI configuration.
+## 0.17.0.2
+* Removed **-prof** from profiling-flags in Cabal-configuration.
