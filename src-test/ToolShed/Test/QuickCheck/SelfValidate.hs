@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-
 	Copyright (C) 2012-2015 Dr. Alistair Ward
 
@@ -35,8 +36,11 @@ import qualified	Data.Set
 import qualified	Test.QuickCheck
 import			Test.QuickCheck((==>))
 import qualified	ToolShed.SelfValidate	as SelfValidate
+
+#if !MIN_VERSION_QuickCheck(2,8,2)
 import			ToolShed.Test.QuickCheck.Arbitrary.Map()
 import			ToolShed.Test.QuickCheck.Arbitrary.Set()
+#endif
 
 -- | A test-type.
 newtype Primes	= MkPrimes Int	deriving (Eq, Ord, Show)

@@ -86,6 +86,6 @@ results	= sequence [
 		prop_interleave' xs ys	= not (null xs) ==> Test.QuickCheck.label "prop_interleave'" $ head (ToolShed.Data.List.interleave xs ys) == head xs
 
 		prop_jaroDistanceCommutative, prop_jaroDistanceRange :: (String, String) -> Test.QuickCheck.Property
-		prop_jaroDistanceCommutative pair 	= Test.QuickCheck.label "prop_jaroDistanceCommutative" $ (ToolShed.Data.List.measureJaroDistance pair :: Rational) == ToolShed.Data.List.measureJaroDistance (Data.Tuple.swap pair)
-		prop_jaroDistanceRange pair 		= Test.QuickCheck.label "prop_jaroDistanceRange" $ all ($ (ToolShed.Data.List.measureJaroDistance pair :: Rational)) [(>= 0), (<= 1)] 
+		prop_jaroDistanceCommutative pair	= Test.QuickCheck.label "prop_jaroDistanceCommutative" $ (ToolShed.Data.List.measureJaroDistance pair :: Rational) == ToolShed.Data.List.measureJaroDistance (Data.Tuple.swap pair)
+		prop_jaroDistanceRange pair		= Test.QuickCheck.label "prop_jaroDistanceRange" $ all ($ (ToolShed.Data.List.measureJaroDistance pair :: Rational)) [(>= 0), (<= 1)]
 

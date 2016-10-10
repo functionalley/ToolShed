@@ -1,4 +1,5 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
+{-# LANGUAGE CPP #-}
 {-
 	Copyright (C) 2012-2015 Dr. Alistair Ward
 
@@ -18,16 +19,18 @@
 {- |
  [@AUTHOR@]	Dr. Alistair Ward
 
- [@DESCRIPTION@]	Implements 'Test.QuickCheck.Arbitrary' for 'Data.Map.Map'.
+ [@DESCRIPTION@]	Implements 'Test.QuickCheck.Arbitrary' for 'Data.Map.Map'; which was subsequently implemented in "QuickCheck-2.8.2".
 
  [@EXAMPLE@]	@Test.QuickCheck.sample (Test.QuickCheck.arbitrary :: Test.QuickCheck.Gen.Gen (Data.Map.Map Char Int))@
 -}
 
 module ToolShed.Test.QuickCheck.Arbitrary.Map() where
 
+#if !MIN_VERSION_QuickCheck(2,8,2)
 import qualified	Data.Map
 import qualified	Test.QuickCheck
 
 instance (Ord k, Test.QuickCheck.Arbitrary k, Test.QuickCheck.Arbitrary v) => Test.QuickCheck.Arbitrary (Data.Map.Map k v)	where
 	arbitrary	= Data.Map.fromList `fmap` Test.QuickCheck.arbitrary {-[(k, v)]-}
+#endif
 

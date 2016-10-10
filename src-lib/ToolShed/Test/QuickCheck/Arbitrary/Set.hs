@@ -1,4 +1,5 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
+{-# LANGUAGE CPP #-}
 {-
 	Copyright (C) 2012-2015 Dr. Alistair Ward
 
@@ -18,16 +19,18 @@
 {- |
  [@AUTHOR@]	Dr. Alistair Ward
 
- [@DESCRIPTION@]	Implements 'Test.QuickCheck.Arbitrary' for 'Data.Set.Set'.
+ [@DESCRIPTION@]	Implements 'Test.QuickCheck.Arbitrary' for 'Data.Set.Set'; which was subsequently implemented in "QuickCheck-2.8.2".
 
  [@EXAMPLE@]	@Test.QuickCheck.sample (Test.QuickCheck.arbitrary :: Test.QuickCheck.Gen.Gen (Data.Set.Set Int))@
 -}
 
 module ToolShed.Test.QuickCheck.Arbitrary.Set() where
 
+#if !MIN_VERSION_QuickCheck(2,8,2)
 import qualified	Data.Set
 import qualified	Test.QuickCheck
 
 instance (Ord k, Test.QuickCheck.Arbitrary k) => Test.QuickCheck.Arbitrary (Data.Set.Set k)	where
 	arbitrary	= Data.Set.fromList `fmap` Test.QuickCheck.arbitrary {-[k]-}
+#endif
 
