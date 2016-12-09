@@ -36,6 +36,8 @@ import qualified	Data.Map
 	* Group equal (though not necessarily adjacent; cf. 'Data.List.groupBy') elements, according to the specified comparator.
 
 	* The groups are returned in ascending order, whilst their elements remain in their original order.
+
+	* See 'GHC.Exts.groupWith'.
 -}
 gatherBy
 	:: (Data.Foldable.Foldable foldable, Ord b)
