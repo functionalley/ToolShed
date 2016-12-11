@@ -130,3 +130,4 @@
 ## 0.17.0.2
 * Removed **-prof** from profiling-flags in Cabal-configuration.
 ## 0.18.0.0
+* Removed single-function module **ToolShed.Data.Array.IArray**.
