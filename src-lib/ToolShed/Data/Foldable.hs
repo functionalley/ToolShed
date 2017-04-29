@@ -31,6 +31,7 @@ module ToolShed.Data.Foldable(
 import			Control.Arrow((&&&))
 import qualified	Data.Foldable
 import qualified	Data.Map
+import qualified	Data.Set
 
 {- |
 	* Group equal (though not necessarily adjacent; cf. 'Data.List.groupBy') elements, according to the specified comparator.
@@ -52,5 +53,8 @@ gather	= gatherBy id
 
 -- | Whether the specified collection contains any equal items.
 hasDuplicates :: (Data.Foldable.Foldable foldable, Ord a) => foldable a -> Bool
-hasDuplicates	= any ((/= 1) . length) . gather
-
+hasDuplicates	= fst . Data.Foldable.foldr (
+	\x (result, s)	-> if result || Data.Set.member x s
+		then (True, s)
+		else (False, Data.Set.insert x s)
+ ) (False, Data.Set.empty)
