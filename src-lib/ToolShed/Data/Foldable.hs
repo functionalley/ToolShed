@@ -52,5 +52,5 @@ gather	= gatherBy id
 
 -- | Whether the specified collection contains any equal items.
 hasDuplicates :: (Data.Foldable.Foldable foldable, Ord a) => foldable a -> Bool
-hasDuplicates	= any ((> 1) . length) . gather
+hasDuplicates	= any ((/= 1) . length) . gather
 
