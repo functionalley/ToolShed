@@ -31,21 +31,31 @@ import qualified	Data.Set
 import qualified	ToolShed.Data.Foldable
 import qualified	ToolShed.Data.List
 import qualified	Test.QuickCheck
+import			Test.QuickCheck((==>))
 
 -- | The constant test-results for this data-type.
 results :: IO [Test.QuickCheck.Result]
 results	= sequence [
-	Test.QuickCheck.quickCheckResult prop_gatherSet,
-	Test.QuickCheck.quickCheckResult prop_gatherBy
- ] where
-	prop_gatherSet :: Int -> Test.QuickCheck.Property
-	prop_gatherSet n	= Test.QuickCheck.label "prop_gatherSet" . (== l) . concat . ToolShed.Data.Foldable.gather $ Data.Set.fromDistinctAscList l	where
-		l	= [0 .. n `mod` 1024]
-
-	prop_gatherBy :: [Int] -> Test.QuickCheck.Property
-	prop_gatherBy l	= Test.QuickCheck.label "prop_gatherBy" $ map Data.List.sort (
-		ToolShed.Data.Foldable.gatherBy even l
-	 ) == (
-		map Data.List.sort . Data.List.groupBy (ToolShed.Data.List.equalityBy even) $ Data.List.sortBy (Data.Ord.comparing even) l
-	 )
+	let
+		f :: Int -> Test.QuickCheck.Property
+		f n	= Test.QuickCheck.label "prop_gatherSet" . (== l) . concat . ToolShed.Data.Foldable.gather $ Data.Set.fromDistinctAscList l	where
+			l	= [0 .. n `mod` 1024]
+	in Test.QuickCheck.quickCheckResult f,
+	let
+		f :: [Int] -> Test.QuickCheck.Property
+		f l	= Test.QuickCheck.label "prop_gatherBy" $ map Data.List.sort (
+			ToolShed.Data.Foldable.gatherBy even l
+		 ) == (
+			map Data.List.sort . Data.List.groupBy (ToolShed.Data.List.equalityBy even) $ Data.List.sortBy (Data.Ord.comparing even) l
+		 )
+	in Test.QuickCheck.quickCheckResult f,
+	let
+		f :: [Int] -> Test.QuickCheck.Property
+		f l	= not (null l) ==> Test.QuickCheck.label "prop_hasDuplicates" . ToolShed.Data.Foldable.hasDuplicates $ l ++ l
+	in Test.QuickCheck.quickCheckResult f,
+	let
+		f :: [Int] -> Test.QuickCheck.Property
+		f	= Test.QuickCheck.label "prop_hasDuplicates/unique" . not . ToolShed.Data.Foldable.hasDuplicates . Data.List.nub
+	in Test.QuickCheck.quickCheckResult f
+ ]
 
