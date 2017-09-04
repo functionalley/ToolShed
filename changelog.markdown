@@ -125,10 +125,13 @@
 * Generalised function **ToolShed.System.Random.select** to accept any **Data.Foldable.Foldable** rather than merely a list, & to return **Maybe** rather than an error on receipt of null.
 * Added fuzzy matching function **ToolShed.Data.List.measureJaroDistance** & associated **HUnit** & **Quickcheck** tests.
 * Tested with **ghc-8.0.1**.
+
 ## 0.17.0.1
 * Modified Travis-CI configuration.
+
 ## 0.17.0.2
 * Removed **-prof** from profiling-flags in Cabal-configuration.
+
 ## 0.18.0.0
 * Removed single-function module **ToolShed.Data.Array.IArray**.
 * Refactoring of **ToolShed.Data.Foldable.hasDuplicates**, for which quickchecks were then added.
