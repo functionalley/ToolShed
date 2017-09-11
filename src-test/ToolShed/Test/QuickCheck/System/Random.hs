@@ -43,7 +43,7 @@ getMean	= uncurry (/) . (realToFrac *** fromIntegral) . Data.Foldable.foldr (\i 
 
 -- | Find the standard-deviation of the specified list.
 getStandardDeviation :: (Data.Foldable.Foldable foldable, Functor foldable, Real r) => foldable r -> Double
-getStandardDeviation x	= sqrt . getMean $ fmap ((^ (2 :: Int)) . (+ negate (getMean x :: Rational)) . toRational) x
+getStandardDeviation x	= sqrt . getMean $ fmap ((^ (2 :: Int)) . subtract (getMean x :: Rational) . toRational) x
 
 -- | The constant test-results for this data-type.
 results :: IO [Test.QuickCheck.Result]
