@@ -135,3 +135,4 @@
 ## 0.18.0.0
 * Removed single-function module **ToolShed.Data.Array.IArray**.
 * Refactoring of **ToolShed.Data.Foldable.hasDuplicates**, for which quickchecks were then added.
+* Added mutators to **ToolShed.Data.Triple** & **ToolShed.Data.Quadruple**.

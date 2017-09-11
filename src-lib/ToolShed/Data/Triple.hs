@@ -29,7 +29,11 @@ module ToolShed.Data.Triple(
 -- ** Accessors
 	getFirst,
 	getSecond,
-	getThird
+	getThird,
+-- ** Mutators
+	mutateFirst,
+	mutateSecond,
+	mutateThird
 ) where
 
 -- | Extends the concept of 'Data.Tuple.curry'.
@@ -51,4 +55,16 @@ getSecond (_, b, _)	= b
 -- | Access the third datum from the specified triple.
 getThird :: (a, b, c) -> c
 getThird (_, _, c)	= c
+
+-- | Operate on first datum.
+mutateFirst :: (a -> a') -> (a, b, c) -> (a', b, c)
+mutateFirst f (a, b, c)	= (f a, b, c)
+
+-- | Operate on second datum.
+mutateSecond :: (b -> b') -> (a, b, c) -> (a, b', c)
+mutateSecond f (a, b, c)	= (a, f b, c)
+
+-- | Operate on third datum.
+mutateThird :: (c -> c') -> (a, b, c) -> (a, b, c')
+mutateThird f (a, b, c)	= (a, b, f c)
 

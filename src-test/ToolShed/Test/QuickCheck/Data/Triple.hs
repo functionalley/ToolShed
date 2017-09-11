@@ -30,8 +30,11 @@ import qualified	ToolShed.Data.Triple
 
 -- | The constant test-results for this data-type.
 results :: IO [Test.QuickCheck.Result]
-results	= mapM Test.QuickCheck.quickCheckResult [prop_accessors]	where
-	prop_accessors :: (Int, Char, Bool) -> Test.QuickCheck.Property
+results	= mapM Test.QuickCheck.quickCheckResult [prop_accessors, prop_mutators]	where
+	prop_accessors, prop_mutators :: (Int, Char, Rational) -> Test.QuickCheck.Property
 	prop_accessors triple	= Test.QuickCheck.label "prop_accessors" $ (f ToolShed.Data.Triple.getFirst triple, f ToolShed.Data.Triple.getSecond triple, f ToolShed.Data.Triple.getThird triple) == triple	where
 		f	= ToolShed.Data.Triple.uncurry3 . ToolShed.Data.Triple.curry3
 
+	prop_mutators triple	= Test.QuickCheck.label "prop_mutators" $ (
+		ToolShed.Data.Triple.mutateThird pred . ToolShed.Data.Triple.mutateThird succ . ToolShed.Data.Triple.mutateSecond pred . ToolShed.Data.Triple.mutateSecond succ . ToolShed.Data.Triple.mutateFirst pred $ ToolShed.Data.Triple.mutateFirst succ triple
+	 ) == triple

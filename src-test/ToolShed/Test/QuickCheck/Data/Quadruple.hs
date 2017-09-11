@@ -30,7 +30,11 @@ import qualified	ToolShed.Data.Quadruple
 
 -- | The constant test-results for this data-type.
 results :: IO [Test.QuickCheck.Result]
-results	= mapM Test.QuickCheck.quickCheckResult [prop_accessors]	where
-	prop_accessors :: (Int, Char, Bool, Float) -> Test.QuickCheck.Property
+results	= mapM Test.QuickCheck.quickCheckResult [prop_accessors, prop_mutators]	where
+	prop_accessors, prop_mutators :: (Int, Char, Rational, Integer) -> Test.QuickCheck.Property
 	prop_accessors quadruple	= Test.QuickCheck.label "prop_accessors" $ (f ToolShed.Data.Quadruple.getFirst quadruple, f ToolShed.Data.Quadruple.getSecond quadruple, f ToolShed.Data.Quadruple.getThird quadruple, ToolShed.Data.Quadruple.getFourth quadruple) == quadruple	where
 		f	= ToolShed.Data.Quadruple.uncurry4 . ToolShed.Data.Quadruple.curry4
+
+	prop_mutators quadruple	= Test.QuickCheck.label "prop_mutators" $ (
+		ToolShed.Data.Quadruple.mutateForth pred . ToolShed.Data.Quadruple.mutateForth succ . ToolShed.Data.Quadruple.mutateThird pred . ToolShed.Data.Quadruple.mutateThird succ . ToolShed.Data.Quadruple.mutateSecond pred . ToolShed.Data.Quadruple.mutateSecond succ . ToolShed.Data.Quadruple.mutateFirst pred $ ToolShed.Data.Quadruple.mutateFirst succ quadruple
+	 ) == quadruple

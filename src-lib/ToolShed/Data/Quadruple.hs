@@ -30,7 +30,12 @@ module ToolShed.Data.Quadruple(
 	getFirst,
 	getSecond,
 	getThird,
-	getFourth
+	getFourth,
+-- ** Mutators
+	mutateFirst,
+	mutateSecond,
+	mutateThird,
+	mutateForth
 ) where
 
 -- | Extends the concept of 'Data.Tuple.curry'.
@@ -57,3 +62,19 @@ getThird (_, _, c, _)	= c
 getFourth :: (a, b, c, d) -> d
 getFourth (_, _, _, d)	= d
 
+
+-- | Operate on first datum.
+mutateFirst :: (a -> a') -> (a, b, c, d) -> (a', b, c, d)
+mutateFirst f (a, b, c, d)	= (f a, b, c, d)
+
+-- | Operate on second datum.
+mutateSecond :: (b -> b') -> (a, b, c, d) -> (a, b', c, d)
+mutateSecond f (a, b, c, d)	= (a, f b, c, d)
+
+-- | Operate on third datum.
+mutateThird :: (c -> c') -> (a, b, c, d) -> (a, b, c', d)
+mutateThird f (a, b, c, d)	= (a, b, f c, d)
+
+-- | Operate on third datum.
+mutateForth :: (d -> d') -> (a, b, c, d) -> (a, b, c, d')
+mutateForth f (a, b, c, d)	= (a, b, c, f d)
