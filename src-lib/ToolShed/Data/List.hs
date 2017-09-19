@@ -94,8 +94,8 @@ equalityBy f x y	= f x == f y
 
 -- | Take the first element from the (potentially infinite) list, which matches the subsequent element, according to the specified function.
 findConvergenceBy :: Matches a -> [a] -> a
-findConvergenceBy _ []	=  error "ToolShed.Data.List.findConvergenceBy:\ta null list is too short for convergence to exist"
-findConvergenceBy _ [_]	=  error "ToolShed.Data.List.findConvergenceBy:\ta singleton list is too short for convergence to exist"
+findConvergenceBy _ []	= error "ToolShed.Data.List.findConvergenceBy:\ta null list is too short for convergence to exist"
+findConvergenceBy _ [_]	= error "ToolShed.Data.List.findConvergenceBy:\ta singleton list is too short for convergence to exist"
 findConvergenceBy matches l
 	| null l'	= error "ToolShed.Data.List.findConvergenceBy:\tno convergence found"
 	| otherwise	= fst $ head l'
