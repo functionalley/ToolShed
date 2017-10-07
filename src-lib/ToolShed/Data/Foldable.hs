@@ -51,10 +51,15 @@ gatherBy f	= Data.Map.elems . Data.Foldable.foldr (uncurry (Data.Map.insertWith 
 gather :: (Data.Foldable.Foldable foldable, Ord a) => foldable a -> [[a]]
 gather	= gatherBy id
 
--- | Whether the specified collection contains any equal items.
+{- |
+	* Whether the specified collection contains any equal items.
+
+	* See 'Data.List.Extra.anySame'.
+-}
 hasDuplicates :: (Data.Foldable.Foldable foldable, Ord a) => foldable a -> Bool
 hasDuplicates	= fst . Data.Foldable.foldr (
 	\x (result, s)	-> if result || Data.Set.member x s
 		then (True, s)
 		else (False, Data.Set.insert x s)
  ) (False, Data.Set.empty)
+
