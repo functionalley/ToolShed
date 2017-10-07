@@ -25,12 +25,12 @@ module ToolShed.Test.QuickCheck.Data.Foldable(
 	results
 ) where
 
+import			Control.Arrow((&&&))
 import qualified	Data.List
-import qualified	Data.Ord
+import qualified	Data.List.Extra
 import qualified	Data.Set
-import qualified	ToolShed.Data.Foldable
-import qualified	ToolShed.Data.List
 import qualified	Test.QuickCheck
+import qualified	ToolShed.Data.Foldable
 import			Test.QuickCheck((==>))
 
 -- | The constant test-results for this data-type.
@@ -43,10 +43,8 @@ results	= sequence [
 	in Test.QuickCheck.quickCheckResult f,
 	let
 		f :: [Int] -> Test.QuickCheck.Property
-		f l	= Test.QuickCheck.label "prop_gatherBy" $ map Data.List.sort (
-			ToolShed.Data.Foldable.gatherBy even l
-		 ) == (
-			map Data.List.sort . Data.List.groupBy (ToolShed.Data.List.equalityBy even) $ Data.List.sortBy (Data.Ord.comparing even) l
+		f	= Test.QuickCheck.label "prop_gatherBy" . uncurry (==) . (
+			map Data.List.sort . ToolShed.Data.Foldable.gatherBy even &&& map Data.List.sort . Data.List.Extra.groupSortOn even
 		 )
 	in Test.QuickCheck.quickCheckResult f,
 	let

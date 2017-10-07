@@ -121,6 +121,7 @@ Test-Suite test
     Build-depends:
         base == 4.*,
         containers >= 0.4.2.0,
+        extra,
         HUnit,
         QuickCheck >= 2.2,
         random,

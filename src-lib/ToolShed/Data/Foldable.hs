@@ -38,7 +38,7 @@ import qualified	Data.Set
 
 	* The groups are returned in ascending order, whilst their elements remain in their original order.
 
-	* See 'GHC.Exts.groupWith'.
+	* See 'GHC.Exts.groupWith', 'Data.List.Extra.groupSortOn'.
 -}
 gatherBy
 	:: (Data.Foldable.Foldable foldable, Ord b)
