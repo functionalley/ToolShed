@@ -140,6 +140,8 @@ permutations	= permutationsBy (\_ _ -> True)
 	* CAVEAT: the specified list must be finite, since the entire set is constructed before streaming to a list.
 
 	* CAVEAT: it sorts the output as a side-effect, & consequently it requires a type which implements 'Ord'.
+
+	* See 'Data.List.Extra.nubOrd'.
 -}
 nub' :: Ord a => [a] -> [a]
 nub'	= Data.Set.toList . Data.Set.fromList
