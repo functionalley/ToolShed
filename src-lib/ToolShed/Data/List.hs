@@ -64,6 +64,8 @@ type ChunkLength	= Int
 	* If the chunk-length is zero, the resulting list will be an infinite sequence of null lists.
 
 	* CAVEAT: a similar function is available in the module /Data.List.Split/, though this one checks for @(chunkLength < 0)@.
+
+	* See 'Data.List.Extra.chunksOf'.
 -}
 chunk
 	:: ChunkLength
