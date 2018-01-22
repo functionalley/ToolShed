@@ -30,7 +30,7 @@
 
 ## 0.11.1.0
 * Added functions `merge` & `mergeBy` to module "**ToolShed.ListPlus**" & exported a new type-synonym `ToolShed.ListPlus.ChunkLength`.
-* Uploaded to [Hackage](http://hackage.haskell.org/package/toolshed).
+* Uploaded to [Hackage](https://hackage.haskell.org/package/toolshed).
 
 ## 0.12.0.0
 * Added modules "**ToolShed.TimeAction**" to measure the CPU-seconds required for an IO-action, & "**Pair**".
