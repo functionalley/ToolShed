@@ -1,4 +1,4 @@
-# 2010-11-18 Dr. Alistair Ward <toolshed@functionalley.eu>
+# 2010-11-18 Dr. Alistair Ward <toolshed@functionalley.com>
 
 ## 0.9.0.0
 * First version of the package.
@@ -136,3 +136,6 @@
 * Removed single-function module **ToolShed.Data.Array.IArray**.
 * Refactoring of **ToolShed.Data.Foldable.hasDuplicates**, for which quickchecks were then added.
 * Added mutators to **ToolShed.Data.Triple** & **ToolShed.Data.Quadruple**.
+
+## 0.18.0.1
+Changed references to author's domain-name.
