@@ -139,3 +139,6 @@
 
 ## 0.18.0.1
 Changed references to author's domain-name.
+
+## 0.18.0.2
+Updated list of test-compilers.
